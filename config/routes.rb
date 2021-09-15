@@ -9,4 +9,5 @@ root :to => 'books#top'
     put 'books/:id' => 'books#update'
     post "books/:id/update" => 'books#update'
     delete 'books/:id' => 'books#destroy', as: 'destroy_book'
+    resources :books, only:[:index, :show]
 end

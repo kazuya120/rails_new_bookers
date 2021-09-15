@@ -15,7 +15,7 @@
     <td><%= book.title %></td>
     <td><%= book.body %></td>
     <td>
-     <%= link_to "Show", show_book_path(book.id) %>
+     <%= link_to "Show", book_path(book) %>
      <%= link_to "Edit", edit_book_path(book.id) %>
      <%= link_to "Destroy", destroy_book_path(book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
    </tr>
@@ -24,7 +24,7 @@
  </table>
   
 <h3>New book</h3>
-<%= form_for(@book) do |f| %>
+<%= form_with model:@book, local:true do |f| %>
  <% if @book.errors.any? %>
  <%= @book.errors.count %>件のerror
  <% @book.errors.full_messages.each do |message| %>
@@ -36,5 +36,11 @@
  <br><label for="book_title">Body</label>
  <%= f.text_area :body %>
  <br><%= f.submit 'Create Book' %>
+ 
+ <% if flash[:notice] %>
+ <p id="notice">
+     <%= flash[:notice] %>
+</p>
+<% end %>
 <% end %>
 
